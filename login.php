@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <!--[if IEMobile 7 ]>    <html class="no-js iem7" lang="en-US"> <![endif]-->
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en-US"> <![endif]-->
@@ -41,6 +44,14 @@
         <div class="row"> 
             <div class="grid_5">
 				<h1>Login</h1>
+				<?php
+					if(isset($_SESSION['last_page']) && $_SESSION['last_page'] == "validate_entry") {
+						if (isset($_SESSION['invalid_user']) && $_SESSION['invalid_user'] == true) {
+							echo "<div class=\"error-msg\" id=\"errormsg_0_userpass\">Incorrect username or password. Please try again.</div>";
+	                    }
+					}
+					$_SESSION['last_page'] = "login";
+				?>
 				<form method="POST" action="php/validate_entry.php" onsubmit="validateMyForm();">
 				<input id="username" name="username" placeholder="Username" type="text" value="" spellcheck="false" onchange="remove_error();">
 				<span role="alert" class="error-msg" name="errormsg_0_username" id="errormsg_0_username"></span>
@@ -100,11 +111,13 @@
 				this.username.className = this.username.className.replace
       ( /(?:^|\s)form-error(?!\S)/g , '' );
 				this.errormsg_0_username.innerHTML = "";
+				this.errormsg_0_userpass.innerHTML = "";
 			}
 			if(this.password.value != "") {
 				this.password.className = this.password.className.replace
       ( /(?:^|\s)form-error(?!\S)/g , '' );
 				this.errormsg_0_password.innerHTML = "";
+				this.errormsg_0_userpass.innerHTML = "";
 			}
 			return true;
 		}

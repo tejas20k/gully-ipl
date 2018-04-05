@@ -193,6 +193,7 @@ _:-ms-input-placeholder, :root .demo-graph {
   color: white;
   font-size: 24px;
   font-weight: 400;
+
 }
 .demo-cards ul {
   padding: 0;
@@ -202,10 +203,24 @@ _:-ms-input-placeholder, :root .demo-graph {
 }
 .demo-updates1 .mdl-card__title {
   min-height: 130px;
-  background-image: url(../images/leaderboard-icon.png);
+  background-image: url(../images/leaderboard.png);
   background-position: 90% 60%;
   background-repeat: no-repeat;
-  background-size: 40% 90%;
+  background-size: 35% 90%;
+}
+.demo-updates2 .mdl-card__title {
+  min-height: 130px;
+  background-image: url(../images/winners.png);
+  background-position: 90% 60%;
+  background-repeat: no-repeat;
+  background-size: 45% 90%;
+}
+.demo-updates3 .mdl-card__title {
+  min-height: 130px;
+  background-image: url(../images/dhoni.png);
+  background-position: 90% 60%;
+  background-repeat: no-repeat;
+  background-size: 30% 90%;
 }
 .demo-updates .mdl-card__title {
   min-height: 200px;

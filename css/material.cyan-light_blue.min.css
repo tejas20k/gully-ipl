@@ -207,11 +207,12 @@ h2 {
 }
 h2,
 h3 {
-    margin: 24px 0
+    margin-top: 24px;
+    margin-bottom: 2px
 }
 h3 {
     font-size: 34px;
-    line-height: 40px
+    line-height: 30px
 }
 h3,
 h4 {
@@ -2580,7 +2581,7 @@ input.mdl-button[type="submit"] {
 }
 .mdl-card__supporting-text {
     color: rgba(0, 0, 0, .54);
-    font-size: 17px;
+    font-size: 1rem;
     line-height: 18px;
     overflow: hidden;
     padding: 16px;
