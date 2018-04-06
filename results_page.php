@@ -32,20 +32,31 @@
                      <table style=\"text-align: center; margin: auto;\">
                         <td><input id=\"". $row['match_id']."_".$row['t1_id'] ."\" type=\"radio\" name=\"". $row['match_id'] ."\" value=\"". $row['t1_id'] ."\"";
                         if($row['t1_id']==$row['winning_team']) $result .= " checked=\"checked\"";
-                        $result .= " disabled=\"disabled\"/>
-                        <label class=\"drinkcard-cc\" for=\"". $row['match_id']."_".$row['t1_id'] ."\" style=\"background-position: center; background-image: url('" .$row['t1_logo_path'] ."');\"></label></td><td width=\"50%\">
+                        else $result .= " disabled=\"disabled\"";
+                        $result .= "/>
+                        <label class=\"drinkcard-cc\" for=\"". $row['match_id']."_".$row['t1_id'] ."\" style=\"background-position: center; background-image: url('" .$row['t1_logo_path'] ."')";
+                        if($row['t1_id']==$row['winning_team']) $result .= ",url('images/win.png')";
+                        $result .= ";\"></label></td>
+                        <td width=\"50%\">
                         <label style=\"text-align: center; position: relative;\">" .getMatchDetails($row['match_id']) ."</label></td><td>
                         <input id=\"". $row['match_id']."_". $row['t2_id'] ."\" type=\"radio\" name=\"". $row['match_id'] ."\" value=\"". $row['t2_id'] ."\"";
                         if($row['t2_id']==$row['winning_team']) $result .= " checked=\"checked\"";
+                        else $result .= " disabled=\"disabled\"";
                         $result .= "/>
-                        <label class=\"drinkcard-cc\" for=\"". $row['match_id']."_".$row['t2_id'] ."\" style=\"background-position: center; background-image: url('" .$row['t2_logo_path'] ."'),url('images/teams/win.png');\"></label></td>
+                        <label class=\"drinkcard-cc\" for=\"". $row['match_id']."_".$row['t2_id'] ."\" style=\"background-position: center; background-image: url('" .$row['t2_logo_path'] ."')";
+                        if($row['t2_id']==$row['winning_team']) $result .= ",url('images/win.png')";
+                        $result .= ";\"></label></td>
                       </table>
                      </div>
                   </div>
                 </div>";
      } 
      if ($i == 0){
-       $result .= "<p>No rankings yet.</p>";
+       $result .= "<div class=\"demo-cards mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col\">
+                  <div class=\"mdl-card__supporting-text mdl-card--expand mdl-color-text--grey-800\">
+                     <h2 class=\"mdl-card__title-text\" style=\"text-align:center\"><b>No matches concluded yet!</b></h2>
+                  </div>
+               </div>";
      }
      return $result;
    }
@@ -53,13 +64,13 @@
    function getMatchDetails($match_id){
     $sql = "SELECT match_description,
                 DATE_FORMAT(match_datetime, '%d %b %Y %h:%i %p') match_time,
-                b.venue_name_long, b.venue_city
+                b.venue_name_long, b.venue_city, a.result_desc
             FROM match_master a, venue_master b
             WHERE a.match_id = " .$match_id ."
             AND a.venue_id = b.venue_id";
     $query = mysqli_query($GLOBALS['con'],$sql);
     $row = mysqli_fetch_array($query,MYSQLI_ASSOC);
-    return "<b>".$row['match_description'] ."</b></br>" .$row['match_time'] ." IST</br>" .$row['venue_name_long'] .",</br>".$row['venue_city'];
+    return "<b>".$row['match_description'] ."</b></br>" .$row['match_time'] ." IST</br>" .$row['venue_name_long'] .",</br>".$row['venue_city']."</br>" .$row['result_desc'];
    }
    ?>
 <!doctype html>
@@ -148,7 +159,7 @@
             </header>
             <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
                <a class="mdl-navigation__link" href="homepage.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
-               <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">equalizer</i>Rankings</a>
+               <!--a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">equalizer</i>Rankings</a-->
                <a class="mdl-navigation__link" href="vote_now.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">touch_app</i>Vote Now</a>
                <a class="mdl-navigation__link" href="results_page.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">star_border</i>Match Results</a>
                <div class="mdl-layout-spacer"></div>
@@ -156,12 +167,6 @@
          </div>
          <main class="mdl-layout__content mdl-color--grey-100">
             <div class="mdl-grid">
-               <div class="demo-cards mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-                  <div class="mdl-card__supporting-text mdl-card--expand mdl-color-text--grey-800">
-                     <h2 class="mdl-card__title-text" style=""><b>Hi <?php echo getFirstName(); ?>! Welcome to Gully IPL</b></h2>
-                  </div>
-                  <div class="mdl-card__supporting-text" id="message">Start voting now!</br>Click on the team that you bet to win the match and click the 'CAST YOUR VOTE' button.</br>Your vote can be updated any number of times until 1 hour before the match starts using 'UPDATE YOUR VOTE' button.</div>
-               </div>
                <?php echo getMatchInfo(); ?>
                <div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
                  <div class="mdl-snackbar__text"></div>

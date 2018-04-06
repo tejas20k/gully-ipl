@@ -185,7 +185,7 @@
             </header>
             <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
                <a class="mdl-navigation__link" href="homepage.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
-               <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">equalizer</i>Rankings</a>
+               <!--a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">equalizer</i>Rankings</a-->
                <a class="mdl-navigation__link" href="vote_now.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">touch_app</i>Vote Now</a>
                <a class="mdl-navigation__link" href="results_page.php"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">star_border</i>Match Results</a>
                <div class="mdl-layout-spacer"></div>
