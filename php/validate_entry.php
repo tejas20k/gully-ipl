@@ -24,6 +24,13 @@
                 $_SESSION['username'] = $_POST[username];
                 $_SESSION['invalid_user'] = false;
                 //$_SESSION['profilepic'] = $row['ProfilePic'];
+                if($row['gender']=='MALE')
+                	$_SESSION['profilepic'] = "images/male-user.jpg";
+                elseif($row['gender']=='FEMALE')
+                	$_SESSION['profilepic'] = "images/female-user.jpg";
+                else
+                	$_SESSION['profilepic'] = "images/male-user.jpg";
+                
                 header("Location: ../homepage.php");
 				exit();
 			} else {
